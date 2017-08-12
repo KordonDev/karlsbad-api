@@ -1,0 +1,14 @@
+{
+  "name": "karlsbad-api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./server.js"
+  },
+  "dependencies": {
+    "express": "4.15.3",
+    "node-fetch": "1.7.1",
+    "form-data": "2.2.0",
+    "cheerio": "1.0.0-rc.2"
+  }
+}
