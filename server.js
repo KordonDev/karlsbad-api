@@ -9,4 +9,4 @@ routes(app)
 app.listen(3000);
 
 Authorization.login().
-    then((session) => console.log(session));
+    then((session) => console.log('Authorized'));

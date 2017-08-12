@@ -24,5 +24,5 @@ exports.login = function() {
             cookie = cookie.substring(0, end);
             return cookie;
         })
-        .catch((error) => console.error("error", error));
+        .catch((error) => console.error(error));
 }
