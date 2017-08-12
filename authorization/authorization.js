@@ -2,20 +2,20 @@ const BASE_URL = "http://www.karlsbad.de/";
 const FormData = require('form-data');
 const fetch = require('node-fetch');
 
-const Authorization = {
+exports.login = function() {
+    const username = process.env.karlsbadUsername;
+    const password = process.env.karlsbadPassword;
+    let form = new FormData();
+    form.append("p_user_id", username);
+    form.append("p_user_pwd", password);
+    let options = {
+        method: "POST",
+        body: form,
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+    }};
 
-    login(username, password) {
-      let form = new FormData();
-      form.append("p_user_id", username);
-      form.append("p_user_pwd", password);
-      let options = {
-          method: "POST",
-          body: form,
-          headers: {
-              "Content-Type": "application/x-www-form-urlencoded"
-          }};
-
-      return fetch(BASE_URL + "/system?action=user_login", options)
+    return fetch(BASE_URL + "/system?action=user_login", options)
         .then((res) => {
             let cookie = res.headers._headers["set-cookie"][0];
             let start = cookie.indexOf("=");
@@ -25,7 +25,4 @@ const Authorization = {
             return cookie;
         })
         .catch((error) => console.error("error", error));
-    }
-};
-
-module.exports = Authorization;
+}

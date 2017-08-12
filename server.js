@@ -8,5 +8,5 @@ const app = express();
 routes(app)
 app.listen(3000);
 
-Authorization.login("", "").
+Authorization.login().
     then((session) => console.log(session));

@@ -1,7 +1,8 @@
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 
-exports.getAll = function() {
+exports.getAll = function(req, res) {
+    console.log('topics');
     return fetch('http://www.karlsbad.de/news')
         .then((data) => data.text())
         .then((html) => {
@@ -26,7 +27,11 @@ exports.getAll = function() {
                     );
                 }
             });
-            return topicList;
+            res.json(topicList);
+        })
+        .catch(error => {
+            console.error(error);
+            res.send(500);
         });
 };
 
@@ -35,5 +40,6 @@ exports.getById = function(req, res) {
     console.log(path[0]);
     return getAllTopics()
         .then((topics) => topics.find((topic) => topic.name === path[0]))
-        .then((topic) => fetch(`http://www.karlsbad.de/${topic.link}`));
+        .then((topic) => fetch(`http://www.karlsbad.de/${topic.link}`))
+        .then(data => console.log(data));
 }
