@@ -8,5 +8,8 @@ const app = express();
 routes(app)
 app.listen(3000);
 
-Authorization.login().
-    then((session) => console.log('Authorized'));
+Authorization.login()
+    .then((session) => console.log('Authorized'))
+    .then(() => {
+        console.log(Authorization.getCookie());
+    });

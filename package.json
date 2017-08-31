@@ -6,9 +6,11 @@
     "start": "node ./server.js"
   },
   "dependencies": {
+    "cheerio": "1.0.0-rc.2",
     "express": "4.15.3",
-    "node-fetch": "1.7.1",
     "form-data": "2.2.0",
-    "cheerio": "1.0.0-rc.2"
+    "node-fetch": "1.7.1",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
   }
 }
