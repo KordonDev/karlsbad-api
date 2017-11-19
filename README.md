@@ -23,7 +23,13 @@ Creates a new Post of a topic.
 ## Future
 ### Authorization
 
-#### POST `/`
+#### POST `/:name`
 __Body__
+    * onlineFrom?: UTCDate
+    * onlineUntil?: UTCDate
+    * printKW?: number
+    * header: string
+
+
 * `username`: username to authenticate
 * `password`: password to authenticate

@@ -26,7 +26,7 @@ exports.getByName = function(req, res) {
                     content: $(newsHtml).children('.news-article-content').text()
                 });
             });
-            console.log(`Fetched news of ${requestedTopicName}`);
+            console.log(`Fetched news of ${req.params.name}`);
             return newsList;
         })
         .then(newsList => res.json(newsList))
@@ -81,7 +81,8 @@ exports.getByName = function(req, res) {
 
 exports.create = function(req, res) {
     const requestedTopicName = req.params.name;
-    console.log(req.header);
+    console.log('Requestbody: ' + req.body);
+    res.sendStatus(200);
     // publishDate, unpublishDate, printWeekOfYear, title
     getIdForTopic(requestedTopicName)
         .catch(error => {
@@ -101,18 +102,22 @@ exports.create = function(req, res) {
             }};
             return fetch('http://www.karlsbad.de/news', options);
         })
+        .then(data => data.text())
         .then(html => {
+            // hier kommt noch die falsche Seite zurück
             console.log(html);
             const $ = cheerio.load(html);
-            printOpitons = $('[name=article_print_editions] option');
+            $.prototype.logHtml = function() {
+                console.log(this.html());
+            };
+
+            printOpitons = $('select[name=article_print_editions]');
             console.log(printOpitons.length);
             printOpitons.each((ip, p) => {
                 console.log(p.text());
             });
             res.sendStatus(200);
-        })
-
-
+        });
 }
 
 // GET /news?action=view_navigator&category_id=

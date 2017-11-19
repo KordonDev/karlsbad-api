@@ -1,9 +1,12 @@
+const express = require("express");
+const bodyParser = require('body-parser');
+
 const Authorization = require("./authorization/authorization");
 const routes = require("./routes");
 
-const express = require("express");
-
 const app = express();
+
+app.use(bodyParser.json());
 
 routes(app)
 app.listen(3000);
